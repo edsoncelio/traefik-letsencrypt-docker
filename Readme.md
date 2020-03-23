@@ -15,7 +15,8 @@
 ## Configuração da instância EC2
 * Instalar docker
 * Instalar docker-compose
-* Instalar htpasswd (para gerar a senha encriptada para a dashboard do traefik)
+* Instalar htpasswd (para gerar a senha encriptada para a dashboard do traefik), como gerar a senha:
+   - `htpasswd -nb admin Senha-Segura2020@`, exemplo do resultado: `admin:$apr1$6xKLuQMK$Uhw1kUf.V9ulOg7b2ZacU.`
 
 
 ## Configuração do Traefik
@@ -26,6 +27,19 @@
 * No arquivo `docker-compose.yml`, fazer as seguintes alterações:
   - Na linha ` - traefik.frontend.rule=Host:` -> adicionar o domínio ou subdomínio onde o dashboard do traefik vai ser visualizada
   
+
+## Configurar novas aplicações
+
+Ao implantar novas apps conteinerizadas, a única coisa que deve ser adicionada no `docker-compose.yml` são as labels (dessa forma o traefik vai idenficar a rota correta e já gerar o certificado ):
+```
+labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:app.exemplo.com # subdominio onde a app vai responder
+      - traefik.backend=cloud
+      - traefik.port=80 #porta do container
+      - traefik.docker.network=web
+```
+
 ## TODO
  - [ ] Adicionar configuração da EC2 usando Ansible
  - [ ] Adicionar renew automático do certificado
