@@ -14,7 +14,7 @@ services:
       - "80:80"
       - "443:443"
     labels:
-      - traefik.frontend.rule=Host:monitor.tuxpilgrim.me
+      - traefik.frontend.rule=Host:
       #- "traefik.backend=traefik"
       # Traefik will proxy to its own GUI.
       - traefik.port=8081
