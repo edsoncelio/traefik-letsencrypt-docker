@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  proxy:
+    # You might want to use a proper version
+    image: traefik:1.7.9
+    container_name: traefik
+    restart: unless-stopped
+    # Here's the network we created:
+    networks:
+      - web
+    # The traefik entryPoints
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      - traefik.frontend.rule=Host:monitor.tuxpilgrim.me
+      #- "traefik.backend=traefik"
+      # Traefik will proxy to its own GUI.
+      - traefik.port=8081
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - /home/ec2-user/traefik/traefik.toml:/traefik.toml 
+      - /home/ec2-user/traefik/acme.json:/acme.json 
+
+networks: 
+  web: 
+    name: traefik_network 

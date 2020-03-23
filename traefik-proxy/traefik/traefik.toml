@@ -1,0 +1,48 @@
+# uncomment this line to get debug info with "docker logs":
+#debug = true
+
+logLevel = "INFO" 
+defaultEntryPoints = ["https","http"]
+
+# The syntax is somewhat esoteric so this is mostly copy-paste
+[entryPoints]   
+  [entryPoints.dashboard]     
+  address = ":8081"
+    [entryPoints.dashboard.auth]       
+      [entryPoints.dashboard.auth.basic]         
+      users = ["admin:$apr1$EvMMidtx$1Zv4EM7iKWcQRq5lwfpym1"]   
+  [entryPoints.http]     
+   address = ":80"       
+    [entryPoints.http.redirect]        
+    entryPoint = "https"     
+  [entryPoints.https]     
+    address = ":443"       
+     [entryPoints.https.tls]  
+
+[api] 
+entrypoint="dashboard"
+dashboard=true
+
+[docker]
+#endpoint = "unix:///var/run/docker.sock"
+domain = "tuxpilgrim.me"
+watch = true
+#exposedbydefault = false
+network="traefik_network"
+
+[acme]
+email = "edsoncelio2013.1@tuxpilgrim.me"
+storage = "/acme.json"
+# problems with let's encrypt? You can use this staging environment, 
+# if you have to do a lot of trial and error:
+#caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+entryPoint = "https"
+OnHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
+
+# enable web configuration backend.
+#[web]
+
+# Web administration port, proxied in docker-compose.yml
+#address = ":8080"
