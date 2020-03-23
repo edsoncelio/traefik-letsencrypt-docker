@@ -4,9 +4,9 @@
 ## Requisitos
 
 * Domínio (recomendo o `.me`, sai bem em conta!)
-* Certificado https validado pelo Let's Encrypt
+* Certificado https validado pelo Let's Encrypt (no site do [certbot](https://certbot.eff.org/) tem todas as instruções)
 * Instância na EC2 (pode ser uma t2.micro, usando o free tier)
-* [opcional] Uma zona hospedada no Route53 (pode fazer essa gestão no seu provedor de nome do domínio também!)
+* [opcional] Uma zona hospedada no AWS Route53 (pode fazer essa gestão no seu provedor de nome do domínio também!)
 
 
 ## Configuração do domínio
