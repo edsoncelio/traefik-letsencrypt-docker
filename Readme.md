@@ -40,6 +40,8 @@ labels:
       - traefik.docker.network=web
 ```
 
+**Obs.:** existe um exemplo de `docker-compose.yml` no diretório `apache-app/`
+
 ## TODO
  - [ ] Adicionar configuração da EC2 usando Ansible
  - [ ] Adicionar renew automático do certificado
