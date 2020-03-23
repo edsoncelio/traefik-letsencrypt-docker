@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+  app:
+    image: httpd:latest
+    networks:
+      - web
+    volumes:
+       - app-data:/usr/local/apache2/htdocs/ #volume de exemplo, criar: docker volume create app-data
+    labels:
+      - traefik.docker.network=traefik_network
+      - traefik.enable=true
+      - traefik.basic.frontend.rule=Host:webapp.example.com #adicionar o seu subdominio aqui!
+      - traefik.port=80
+      - traefik.backend=webapp
+
+networks:
+  web:
+    name: traefik_network
+
+
+volumes:
+  app-data:
