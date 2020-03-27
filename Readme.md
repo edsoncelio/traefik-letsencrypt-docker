@@ -1,4 +1,4 @@
-# Ambiente Traefik com Let's Encrypt na AWS EC2
+# Ambiente Traefik 1.7 com Let's Encrypt na AWS EC2
 
 
 ## Requisitos
